@@ -1,13 +1,11 @@
-// @ts-ignore
-import { Schema, Types, model, Model } from "mongoose";
+import { Schema, model } from "mongoose";
 import { Task } from "../interfaces/tasks.interface";
 
 const TaskSchema = new Schema<Task>(
   {
-    id: { type: String },
-    name: { type: String },
-    description: { type: String },
-    completed: { type: Boolean }
+    name: { type: String, required: true },
+    description: { type: String, required: true },
+    completed: { type: Boolean },
   },
   {
     timestamps: true,
@@ -15,6 +13,6 @@ const TaskSchema = new Schema<Task>(
   }
 );
 
-const TaskModel = model('tasks', TaskSchema);
+const TaskModel = model("tasks", TaskSchema);
 
 export default TaskModel;

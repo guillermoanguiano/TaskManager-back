@@ -1,9 +1,31 @@
 import { Task } from "../interfaces/tasks.interface";
 import TaskModel from "../models/task.model";
 
-const insertTask = async (task: Task) => {
+export const getTasks = async () => {
+  const response = await TaskModel.find({});
+  return response;
+};
+
+export const getTask = async (id: string) => {
+  const response = await TaskModel.findOne({ _id: id });
+  return response;
+};
+
+export const insertTask = async (task: Task) => {
   const response = await TaskModel.create(task);
   return response;
 };
 
-export { insertTask };
+export const updateTask = async (id: string, data: Task) => {
+  const response = await TaskModel.findOneAndUpdate(
+    { _id: id }, 
+    data, 
+    { new: true },
+  );
+  return response;
+};
+
+export const deleteTask = async (id: string) => {
+  const response = await TaskModel.findByIdAndDelete({ _id: id})
+  return response;
+}

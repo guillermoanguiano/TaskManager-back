@@ -1,40 +1,55 @@
 import { Request, Response } from "express";
 import { handleHttp } from "../utils";
-import { insertTask } from "../services/task.service";
+import {
+  deleteTask,
+  getTask,
+  getTasks,
+  insertTask,
+  updateTask,
+} from "../services/task.service";
 
-export const getTask = (_req: Request, res: Response) => {
+export const getItem = async (req: Request, res: Response) => {
   try {
-  } catch (error) {
-    handleHttp(res, "ERROR_GET_TASK");
-  }
-};
-
-export const getTasks = (_req: Request, res: Response) => {
-  try {
-  } catch (error) {
-    handleHttp(res, "ERROR_GET_TASKS");
-  }
-};
-
-export const updateTaks = (_req: Request, res: Response) => {
-  try {
-  } catch (error) {
-    handleHttp(res, "ERROR_UPDATE_TASK");
-  }
-};
-
-export const postTask = (req: Request, res: Response) => {
-  try {
-    const response = insertTask(req.body);
+    const id = req.params.id;
+    const response = await getTask(id);
     res.send(response);
   } catch (error) {
-    handleHttp(res, "ERROR_POST_TASK");
+    handleHttp(res, "ERROR_GET_ITEM");
   }
 };
 
-export const deleteTask = (_req: Request, res: Response) => {
+export const getItems = async (_: Request, res: Response) => {
   try {
+    const response = await getTasks();
+    res.send(response);
   } catch (error) {
-    handleHttp(res, "ERROR_DELETE_TASK");
+    handleHttp(res, "ERROR_GET_ITEM");
+  }
+};
+
+export const updateItems = async ({params, body}: Request, res: Response) => {
+  try {
+    const response = await updateTask(params.id, body);
+    res.send(response);
+  } catch (error) {
+    handleHttp(res, "ERROR_UPDATE_ITEM");
+  }
+};
+
+export const postItem = async ({ body }: Request, res: Response) => {
+  try {
+    const response = await insertTask(body);
+    res.send(response);
+  } catch (e) {
+    handleHttp(res, "ERROR_POST_ITEM", e);
+  }
+};
+
+export const deleteItem =  async ({ params }: Request, res: Response) => {
+  try {
+    const response = await deleteTask(params.id);
+    res.send(response);
+  } catch (error) {
+    handleHttp(res, "ERROR_DELETE_ITEM");
   }
 };
