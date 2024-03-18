@@ -1,0 +1,34 @@
+# Node modules
+/node_modules
+
+# Generated files
+npm-debug.log
+yarn-error.log
+
+# Environment variables
+.env
+
+# IDE files
+.vscode
+.idea
+
+# Dependency directories
+.pnpm
+.lock-wscript
+.npm
+.node-gyp
+
+# Logs
+logs
+*.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
