@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { handleHttp } from "../utils";
+import { handleHttp } from "../utils/error.handle";
 import {
   deleteTask,
   getTask,
@@ -27,7 +27,7 @@ export const getItems = async (_: Request, res: Response) => {
   }
 };
 
-export const updateItems = async ({params, body}: Request, res: Response) => {
+export const updateItems = async ({ params, body }: Request, res: Response) => {
   try {
     const response = await updateTask(params.id, body);
     res.send(response);
@@ -45,7 +45,7 @@ export const postItem = async ({ body }: Request, res: Response) => {
   }
 };
 
-export const deleteItem =  async ({ params }: Request, res: Response) => {
+export const deleteItem = async ({ params }: Request, res: Response) => {
   try {
     const response = await deleteTask(params.id);
     res.send(response);
